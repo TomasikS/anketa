@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+  </script>
+  <style>
+    html,
+    body,
+    #myChart {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='myChart'></div>
+  
+  
+  <?php
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "anketa";
+
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$sql = "SELECT vala,valb,valc,vald,vale from stats";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+	while($row = $result->fetch_assoc()) {
+	
+	
+	$q1=$row["vala"];
+	$q2=$row["valb"];
+	$q3=$row["valc"];
+	$q4=$row["vald"];
+	$q5=$row["vale"];
+       
+    }
+} else {
+    echo "0 results";
+}
+$conn->close();
+
+?>
+ 
+<script>
+
+var t1 = <?php echo $q1 ?>;
+var t2=t1;
+
+    var myData = [ t1,t1,t1,t1,t1      ];
+ 
+    var myConfig = {
+      "graphset": [{
+        "type": "bar",
+        "title": {
+          "text": "Data  from Database"
+        },
+        "scale-x": {
+          "labels": ["Webster", "Parnel", "Dena", "Tyrell" , "Tyrell"]
+        },
+        "series": [{
+          "values": myData
+        }]
+      }]
+    };
+
+    zingchart.render({
+      id: 'myChart',
+      data: myConfig,
+      height: "100%",
+      width: "100%"
+    });
+  </script>
+</body>
+
+</html>
