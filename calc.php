@@ -1,22 +1,30 @@
 <?php
-$pole =array("", "", "", "", "");
-$pole2 =array(0,0,0,0,0);
-$v=$_POST["check"];
+$a1;
+$a2;
+$a3;
+$a4;
+$a5;
+ $v=$_POST["check"];
+ 
+$a=$_POST["MyRadio"];
  
 
 
-$a;
 
 if($v=="on") {
-if(isset($_POST['submit'])){
-if(!empty($_POST['check_list'])) {
-
-foreach($_POST['check_list'] as $selected) {
-	$a= $selected;
-echo "<p>".$selected ."</p>";
-for ($p = 0; $p < count($pole); $p++)
-	$pole[$p]=$a;
-}
+ 
+ 
+if($a=="Romans") $a1++;
+ 
+if($a=="Westerns") $a2++;
+ 
+if($a=="Sci- fi") $a3++;
+ 
+if($a=="Detectives") $a4++;
+ 
+if($a=="History") $a5++;
+ 
+ 
 $servername = "localhost";
 $username = "root";
 $password = "root";
@@ -33,7 +41,7 @@ if ($conn->connect_error) {
 } 
 
 $sql = "INSERT INTO stats(vala, valb,valc,vald,vale) 
-                VALUES ($pole2[0], $pole2[1], $pole2[2], $pole2[3], $pole2[4]           )";
+                VALUES ($a1, $a2, $a3, $a4, $a5         )";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
@@ -43,15 +51,6 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 }
-else{
-echo "<b>Please select one option.</b>";
-
-}}
-}
-
-else{
-echo "<b>Please enter GDPR</b>";
-
-}
+ 
 
 ?>
